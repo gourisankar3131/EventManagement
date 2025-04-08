@@ -1,0 +1,37 @@
+{% extends 'adminpanel/dashboard.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-5">Event List</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Event name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{event.id}}</td>
+            <td>{{event.event_name}}</td>
+            <td>{{event.description}}</td>
+            <td>
+                {% comment %} <a href="{% url 'adminpanel:update_event' event.id%}" class="btn btn-sm btn-warning">Update</a> {% endcomment %}
+                <a href="{% url 'adminpanel:delete_event' event.id%}"  class="btn btn-sm btn-danger">Delete</a>
+
+            </td>
+        </tr>
+        
+        {% empty %}
+            <tr>
+                <td colspan="3">No events.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'adminpanel:add_event'%}" class="btn btn-primary">Add event</a>
+<a href="{% url 'adminpanel:event_details'%}" class="btn btn-secondary">View details</a>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'adminpanel/admin_base.html'%}
+
+{% block title %}Admin|dashboard{% endblock%}
+
+{% block content %}
+<div class="page-body">
+    <div class="row">
+        <!-- card1 start -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card widget-card-1">
+                <div class="card-block-small">
+                    <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                    <span class="text-c-blue f-w-600"><a href="{% url 'adminpanel:event_list'%}">Events</a></span>
+                    <h4>{{ total_events }}</h4> 
+                    <div>
+                        <span class="f-left m-t-10 text-muted">
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 end -->
+        <!-- card1 start -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card widget-card-1">
+                <div class="card-block-small">
+                    <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                    <span class="text-c-blue f-w-600"><a href="{% url 'adminpanel:category_list'%}">Categories</a></span>
+                    <h4>{{ total_categories }}</h4>
+                    <div>
+                        <span class="f-left m-t-10 text-muted">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 end -->
+        <!-- card1 start -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card widget-card-1">
+                <div class="card-block-small">
+                    <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
+                    <span class="text-c-blue f-w-600"><a href="{% url 'adminpanel:attendee_list'%}">Attendees</a></span>
+                    <h4>{{ total_attendees }}</h4>
+                    <div>
+                        <span class="f-left m-t-10 text-muted">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 end -->
+
+        {% endblock %}

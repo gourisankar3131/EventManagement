@@ -1,0 +1,12 @@
+{% extends "sitevisitor/navbar.html" %}
+
+
+{% block content %}
+<div class="text-start">
+    <p><strong>Name:</strong> {{ request.user.get_full_name }}</p>
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Role:</strong> <span class="badge bg-primary">Admin</span></p>
+    <p><strong>Joined:</strong> {{ request.user.date_joined|date:"F d, Y" }}</p>
+</div>
+{% endblock %}

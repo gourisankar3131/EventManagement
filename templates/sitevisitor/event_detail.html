@@ -1,0 +1,64 @@
+{% include "sitevisitor/navbar.html" %} 
+ 
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 bg-info text-dark" style="max-width: 500px;">
+
+                <!-- Event Image -->
+                <img src="{{ event.image.url }}" class="card-img-top rounded-top" alt="Event image"> 
+
+                <div class="card-body bg-light rounded-bottom">
+                    <!-- Event Name -->
+                    <h2 class="card-title text-center text-black fw-bold">{{ event.event_name }}</h2>
+
+                    <!-- Description -->
+                    <p class="card-text text-center text-secondary">{{ event.description }}</p>
+
+                    <!-- Event Details -->
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>📅 Date:</strong> {{ event.event_date|date:"F j, Y" }}</li>
+                        <li class="list-group-item"><strong>⏰ Time:</strong> {{ event.start_time }} - {{ event.end_time }}</li>
+                        <li class="list-group-item"><strong>📍 Venue:</strong> {{ event.venue }}</li>
+                        <li class="list-group-item">
+                            <strong>🎟️ Tickets Left:</strong> 
+                            {% if event.capacity == 0 %}
+                                <span class="badge bg-danger">No tickets available</span>
+                            {% else %}
+                                <span class="badge bg-success">{{ event.capacity }} available</span>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item"><strong>👤 Organizer:</strong> {{ event.organizer.username }}</li>
+                    </ul>
+
+                    <!-- Booking Section -->
+                    <div class="text-center mt-3">
+                        {% if event.capacity == 0 %}
+                            <button class="btn btn-danger w-100" disabled>
+                                <i class="bi bi-x-circle"></i> Sold Out
+                            </button>
+                        <!-- superadmin cannot book an event-->
+                        {% elif user.is_authenticated and user.is_superuser %}
+                            <button class="btn btn-secondary w-100" disabled>
+                                <i class="bi bi-x-circle"></i> Admins cannot book
+                            </button>    
+                        {% elif user.is_authenticated %}
+                            <a href="{% url 'sitevisitor:event_booking' event.id %}" class="btn btn-success w-100">
+                                <i class="bi bi-ticket-perforated"></i> Book Now
+                            </a>
+                        {% else %}
+                            <a href="{% url 'sitevisitor:login' %}" class="btn btn-warning w-100">
+                                <i class="bi bi-box-arrow-in-right"></i> Login to Book
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

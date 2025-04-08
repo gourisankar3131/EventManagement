@@ -1,0 +1,56 @@
+{% include "sitevisitor/navbar.html" %}
+
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow-lg p-4 border-0" style="max-width: 400px; width: 100%;">
+        <div class="card-body">
+            <!-- Event Name -->
+            <h3 class="text-center text-primary fw-bold mb-3">{{ event.event_name }}</h3>
+
+            <!-- Event Details -->
+            <p class="text-muted text-center mb-3">
+                <strong>📅 {{ event.event_date|date:"F j, Y" }}</strong> | 📍 {{ event.venue }}
+            </p>
+
+            <p class="text-center"><span class="badge bg-danger">🎟️ {{ event.capacity }} Tickets Left</span></p>
+
+            <!-- Booking Form -->
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Ticket Quantity -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Number of Tickets:</label>
+                    <input type="number" name="ticket_quantity" min="1" max="{{ event.capacity }}" required class="form-control">
+                </div>
+
+                <!-- Ticket Type -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Ticket Type:</label>
+                    <select name="ticket_type" class="form-select">
+                        <option value="Regular">Regular - ${{ event.ticket_price }}</option>
+                        <option value="VIP">VIP - ${{ event.vip_price }}</option>
+                    </select>
+                </div>
+
+                <!-- Confirm Booking Button -->
+                <button type="submit" class="btn btn-primary w-100">✅ Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+            {% if messages %}
+            <div class="mt-3">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}success{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

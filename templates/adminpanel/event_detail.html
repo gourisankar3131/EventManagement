@@ -1,0 +1,27 @@
+{% extends 'adminpanel/dashboard.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        {% for event in events %}
+        <div class="col-md-4 d-flex align-items-stretch mb-4">
+            <div class="card shadow-lg h-100">
+                <img src="{% if event.image %}{{ event.image.url }}{% else %}/static/default.jpg{% endif %}" 
+                     class="card-img-top" alt="Event image" style="height: 200px; object-fit: cover;">
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title text-center">{{ event.event_name }}</h5>
+                    <p class="card-text flex-grow-1">{{ event.description }}</p>
+                    <p><strong>Date:</strong> {{ event.event_date|date:"F j, Y" }}</p>
+                    <p><strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}</p>
+                    <p><strong>Venue:</strong> {{ event.venue }}</p>
+                    <p><strong>Organizer:</strong> {{ event.organizer.username }}</p>
+                    <div class="mt-auto text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div> 
+</div>
+{% endblock %}
+

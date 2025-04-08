@@ -1,0 +1,123 @@
+
+{% load static %}
+{% include "sitevisitor/navbar.html" %}
+ {% comment %} {% block title %}sitevisitor|home{% endblock %} {% endcomment %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <div class="carousel-item active">
+          <img src="{% static 'assets/img/blog/music img3.jpg'%}" alt="">
+          <div class="carousel-container">
+            <h2>Evento<br></h2>
+            <p>Your all-in-one solution for seamless events</p>
+          </div>
+        </div><!-- End Carousel Item -->
+
+        <div class="carousel-item">
+          <img src="{% static 'assets/img/blog/music img2.jpg'%}" alt="">
+          <div class="carousel-container">
+            <h2>Welcome to Events<br></h2>
+            <p>Your all-in-one solution for seamless events</p>
+          </div>
+        </div><!-- End Carousel Item -->
+
+        <div class="carousel-item">
+          <img src="{% static 'assets/img/blog/music img3.jpg'%}" alt="">
+           <div class="carousel-container">
+            <h2>Enjoy the Events</h2>
+            <p>There is one life Enjoy the moment</p>
+            
+          </div> 
+        </div><!-- End Carousel Item -->
+
+        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+        <ol class="carousel-indicators"></ol>
+
+      </div>
+
+    </section><!-- /Hero Section -->
+
+<!-- About Section -->
+<section id="about" class="about section py-5">  <!-- Added id="about" -->
+  <div class="container">
+    
+    <!-- Section Title -->
+    <div class="section-title text-center mb-4" data-aos="fade-up">
+      <P>About Us</P>
+    </div> <!-- End Section Title -->
+
+    <div class="row gy-4">
+      <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+        <p>
+          Events bring people together, creating unforgettable experiences and meaningful connections. 
+          Whether it's a corporate seminar, a music festival, or a charity fundraiser, events play a crucial 
+          role in engaging communities and fostering growth. Our platform is designed to simplify event planning, 
+          making it seamless for organizers to create and manage events while ensuring attendees have an easy 
+          and enjoyable registration process.
+        </p>
+        <p>
+          With our event management system, organizers can list their events, set up ticketing, manage schedules, 
+          and track attendee registrations—all in one place. Whether you’re planning a large conference or a small 
+          social gathering, our system provides the tools you need to manage every aspect efficiently.
+        </p>
+        <ul>
+          <li><i class="bi bi-check2-circle"></i> <span>Seamless event management for organizers.</span></li>
+          <li><i class="bi bi-check2-circle"></i> <span>Easy and fast registration for attendees.</span></li>
+          <li><i class="bi bi-check2-circle"></i> <span>Smart ticketing and scheduling system.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    {% comment %} <!-- About Section -->
+    <section id="about" class="about section py-5">
+
+      <!-- Section Title -->
+      <div class="container section-title text-center" data-aos="fade-up ">
+        <p>About Us<br></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 content " data-aos="fade-up" data-aos-delay="100">
+            <p>
+              Events bring people together, creating unforgettable experiences and meaningful connections. Whether it's a corporate seminar, a music festival, or a charity fundraiser, events play a crucial role in engaging communities and fostering growth. Our platform is designed to simplify event planning, making it seamless for organizers to create and manage events while ensuring attendees have an easy and enjoyable registration process.
+
+With our event management system, organizers can list their events, set up ticketing, manage schedules, and track attendee registrations—all in one place. Whether you’re planning a large conference or a small social gathering, our system provides the tools you need to manage every aspect efficiently.
+
+For attendees, discovering and registering for events has never been easier. Our user-friendly interface allows you to browse events by category, date, or location and secure your spot with just a few clicks. We also offer email notifications and reminders so you never miss an event you care about.
+
+From workshops to concerts, we believe every event has the power to inspire and connect people. Join us and be part of something amazing!
+            </p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section --> {% endcomment %}
+
+
+    {% endblock %}
+    {% include "sitevisitor/footer.html" %}
