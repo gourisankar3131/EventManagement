@@ -14,11 +14,23 @@
                 </tr>
             </thead>
             <tbody>
-                {% for attendee in attendee %}
+                {% for attendee in attendees %}
                 <tr>
-                    <td>{{ attendee.name }}</td>
-                    <td>{{ attendee.email }}</td>
-                    <td>{{ attendee.phone_number }}</td>
+                    <td>
+                        {% if attendee.user %}
+                            {{ attendee.user.get_full_name }}
+                        {% else %}
+                            {{ attendee.name|default:"No Name" }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if attendee.user %}
+                            {{ attendee.user.email }}
+                        {% else %}
+                            {{ attendee.email|default:"No Email" }}
+                        {% endif %}
+                    </td>
+                    <td>{{ attendee.phone_number|default:"None" }}</td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -26,6 +38,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            
         </table>
     </div>
 

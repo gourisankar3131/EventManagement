@@ -77,24 +77,26 @@ def category_list(request):
     return render(request,'adminpanel/category_list.html',{'categories':categories})
 
 def add_attendee(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_superuser=False)
     form = AttendeeForm()
     if request.method == "POST":
         form = AttendeeForm(request.POST)
         if form.is_valid():
             attendee = form.save(commit=False)
-            attendee.user = request.user
-            attendee.save()
-            messages.success(request,'You have successfully registere as an attendee') 
-            return redirect('adminpanel:dashboard')
+            
+            #Only non-admins are added as attendee
+            if not request.user.is_superuser:
+                attendee.user = request.user
+                attendee.save()
+                messages.success(request,'You have successfully registere as an attendee') 
+                return redirect('adminpanel:dashboard')
         else:
-            form = AttendeeForm()
-           
+            messages.error(request,"Admins cannot be attendees")
     return render(request,'adminpanel/add_attendee.html',{'form':form,'users':users})
 
 def attendee_list(request):
-    attendee = Attendee.objects.all()
-    return render(request,'adminpanel/attendee_list.html',{'attendee':attendee})
+    attendees = Attendee.objects.filter(user__is_superuser = False)#exclude attendess
+    return render(request,'adminpanel/attendee_list.html',{'attendees':attendees})
 
 def create_event(request):
     form = EventForm()
@@ -110,13 +112,26 @@ def create_event(request):
 
 @login_required(login_url='/login/')
 def event_list(request):
-      events = Event.objects.all()
-      return render(request,'adminpanel/event_list.html',{'events':events})
+    events = Event.objects.all()
+    return render(request,'adminpanel/event_list.html',{'events':events})
 
 @login_required(login_url='/login/')
 def event_detail(request):
     events = Event.objects.all()
     return render(request,'adminpanel/event_detail.html',{'events':events})
+
+def update_event(request,event_id):
+    event = get_object_or_404(Event,id=event_id)
+    form = EventForm()
+    if request.method == "POST":
+        form = EventForm(request.POST,request.Files,instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Event updated successfully")
+            return redirect("adminpanel:event_details",event_id=event.id)
+        else:
+            form = EventForm(instance=event)
+    return render(request,'adminpanel/update_event.html',{'form':form,'event':event})
 
 @login_required(login_url='/login/')
 def delete_event(request,event_id):
@@ -124,7 +139,7 @@ def delete_event(request,event_id):
     if request.method =='POST':
         event.delete()
         messages.success(request,"Event delete successfully")
-        return redirect('adminpanel:event_detail')
+        return redirect('adminpanel:event_list')
     
     return render(request,'adminpanel/delete_event.html',{'event':event})
 

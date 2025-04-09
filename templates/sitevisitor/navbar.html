@@ -66,13 +66,25 @@
           <li><a class="text-black" href="{% url 'sitevisitor:home'%}">Home </a></li>
           <li><a class="text-black" href="{% url 'sitevisitor:event_list'%}">Events</a></li>
           <li><a class="text-black" href="#about">About</a></li>
-    
           {% if request.user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-black fw-bold" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ request.user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="{% url 'sitevisitor:profile' %}">👤 Profile</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'sitevisitor:logout' %}">🚪 Logout</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li><a class="text-black nav-link" href="{% url 'sitevisitor:login'%}">Login</a></li>
+    {% endif %}
+          {% comment %} {% if request.user.is_authenticated %}
           <li><a class="nav-link text-warning fw-bold" href="{% url 'sitevisitor:logout' %}">Logout</a></li> 
           {% else %}
           <li><a class="text-black" href="{% url 'sitevisitor:login'%}">Login</a></li>
           {% endif %}
-      
+          <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li> {% endcomment %}
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav> 

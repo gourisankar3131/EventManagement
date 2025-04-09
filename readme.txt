@@ -1,4 +1,4 @@
-username:eventadmin
-password:adminevent
+username:adminevent
+password:eventadmin
 
 emailpass:dgnv dszx dwvv tfhx

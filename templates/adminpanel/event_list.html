@@ -19,7 +19,7 @@
             <td>{{event.event_name}}</td>
             <td>{{event.description}}</td>
             <td>
-                {% comment %} <a href="{% url 'adminpanel:update_event' event.id%}" class="btn btn-sm btn-warning">Update</a> {% endcomment %}
+                <a href="{% url 'adminpanel:update_event' event.id%}" class="btn btn-sm btn-warning">Update</a> 
                 <a href="{% url 'adminpanel:delete_event' event.id%}"  class="btn btn-sm btn-danger">Delete</a>
 
             </td>

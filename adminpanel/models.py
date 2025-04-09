@@ -39,7 +39,8 @@ class Event(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True)#added category
     start_time = models.DateTimeField() #  actual event start time
     end_time = models.DateTimeField() # actual event end time
-    capacity = models.IntegerField(null=True,blank=True) # max number of attendees allowed   
+    capacity = models.IntegerField(default=0) # max number of attendees allowed
+    requires_ticket = models.BooleanField(default=True)   
     venue = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -76,7 +77,7 @@ class Registration(models.Model):
     ticket_type = models.CharField(max_length=50,choices=[
         ('Regular','Regular'),
         ('VIP','VIP')
-    ])
+    ],null=True,blank=True)
     ticket_quantity = models.PositiveIntegerField(default=1)
     is_confirmed = models.BooleanField(default=False) #confirmation for registration
     
